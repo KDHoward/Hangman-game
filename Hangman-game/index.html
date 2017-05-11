@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HangMan</title>
+
+</head>
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+<script type="text/javascript" src="assets/javascript/game.js"></script>
+<img src="assets/images/hangman.jpg">
+
+
+
+
+
+
+
+<form id="hangman">
+   
+    
+</form>
+<ul id="letters"></ul>
+<p id="man"></p>
+<p id="output" class="output"></p>
+
+
+<body>
+<div id="container">
+    <div id="header">
+    
+    
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+gallows = new Array("--------\n|      |\n|\n|\n|\n|\n=====",
+"--------\n|      O\n|\n|\n|\n|\n=====",
+"--------\n|      O\n|      |\n|\n|\n|\n=====",
+"--------\n|      O\n|     \\|\n|\n|\n|\n=====",
+"--------\n|      O\n|     \\|/\n|\n|\n|\n=====",
+"--------\n|      O\n|     \\|/\n|      |\n|\n|\n=====",
+"--------\n|      O\n|     \\|/\n|      |\n|     /\n|\n=====",
+"--------\n|      O\n|     \\|/\n|      |\n|     / \\\n|\n=====")
+guessChoices = new
+Array("dog","fire","code","ironman","cold","cleveland")
+function startAgain() {
+ guesses = 0
+ max = gallows.length-1
+ guessed = " "
+ len = guessChoices.length - 1
+ toGuess = guessChoices[Math.round(len*Math.random())].toLowerCase()
+ displayHangman()
+ displayToGuess()
+ displayGuessed()
+}
+function stayAway() {
+ document.game.elements[3].focus()
+ alert("Don't mess with this form element!")
+}
+function displayHangman() {
+ document.game.status.value=gallows[guesses]
+}
+function displayToGuess() {
+ pattern=""
+ for (i=0;i<toGuess.length;++i) {
+  if (guessed.indexOf(toGuess.charAt(i)) != -1)
+   pattern += (toGuess.charAt(i)+" ")
+  else pattern += "_ "
+ }
+ document.game.toGuess.value=pattern
+}
+function displayGuessed() {
+ document.game.guessed.value=guessed
+}
+function badGuess(s) {
+ if(toGuess.indexOf(s) == -1) return true
+ return false
+}
+function winner() {
+ for (i=0;i<toGuess.length;++i) {
+  if (guessed.indexOf(toGuess.charAt(i)) == -1) return false
+ }
+ return true
+}
+function guess(s){
+ if (guessed.indexOf(s) == -1) guessed = s + guessed
+ if (badGuess(s)) ++guesses
+ displayHangman()
+ displayToGuess()
+ displayGuessed()
+ if(guesses >= max){
+ alert("You're dead. The word you missed was "+toGuess+".")
+  startAgain()
+ }
+ if (winner()) {
+  alert("You won!")
+  startAgain()
+ }
+}
+// --></SCRIPT>
+</HEAD>
+<BODY>
+<H1>Hangman</H1>
+<FORM NAME="game">
+<PRE>
+<TEXTAREA NAME="status" ROWS="7" COLS="16"
+ ONFOCUS="stayAway()"></TEXTAREA>
+</PRE><P>
+<INPUT TYPE="TEXT" NAME="toGuess"
+ ONFOCUS="stayAway()"> Word to guess<BR>
+<INPUT TYPE="TEXT" NAME="guessed"
+ ONFOCUS="stayAway()"> Letters guessed so far<BR>
+<P>Enter your next guess.</P>
+
+<div id="letters">
+<INPUT  VALUE=" a " ONCLICK="guess('a')"></INPUT>
+<INPUT  VALUE=" b " ONCLICK="guess('b')"></INPUT>
+<INPUT  VALUE=" c " ONCLICK="guess('c')"></INPUT>
+<INPUT  VALUE=" d " ONCLICK="guess('d')"></INPUT>
+<INPUT  VALUE=" e " ONCLICK="guess('e')"></INPUT>
+<INPUT  VALUE=" f " ONCLICK="guess('f')"></INPUT>
+<INPUT  VALUE=" g " ONCLICK="guess('g')"></INPUT>
+<INPUT  VALUE=" h " ONCLICK="guess('h')"></INPUT>
+<INPUT  VALUE=" i " ONCLICK="guess('i')"></INPUT>
+<INPUT  VALUE=" j " ONCLICK="guess('j')"></INPUT>
+<INPUT  VALUE=" k " ONCLICK="guess('k')"></INPUT>
+<INPUT  VALUE=" l " ONCLICK="guess('l')"></INPUT>
+<INPUT  VALUE=" m " ONCLICK="guess('m')"></INPUT>
+<INPUT  VALUE=" n " ONCLICK="guess('n')"></INPUT>
+<INPUT  VALUE=" o " ONCLICK="guess('o')"></INPUT>
+<INPUT  VALUE=" p " ONCLICK="guess('p')"></INPUT>
+<INPUT  VALUE=" q " ONCLICK="guess('q')"></INPUT>
+<INPUT  VALUE=" r " ONCLICK="guess('r')"></INPUT>
+<INPUT  VALUE=" s " ONCLICK="guess('s')"></INPUT>
+<INPUT  VALUE=" t " ONCLICK="guess('t')"></INPUT>
+<INPUT  VALUE=" u " ONCLICK="guess('u')"></INPUT>
+<INPUT  VALUE=" v " ONCLICK="guess('v')"></INPUT>
+<INPUT  VALUE=" w " ONCLICK="guess('w')"></INPUT>
+<INPUT  VALUE=" x " ONCLICK="guess('x')"></INPUT>
+<INPUT  VALUE=" y " ONCLICK="guess('y')"></INPUT>
+<INPUT  VALUE=" z " ONCLICK="guess('z')"></INPUT>
+</div>
+<P>
+<INPUT  NAME="restart" VALUE="---- Start Again ----"
+ ONCLICK="startAgain()">
+<SCRIPT LANGUAGE="JavaScript">
+startAgain()
+</SCRIPT>
+
+
+
+ 	
+</FORM>
+</BODY>
+</HTML>
